@@ -571,7 +571,7 @@ require('lazy').setup({
         stylua = {},
         tailwindcss = {},
         terraformls = {},
-        ts_ls = {
+        tsserver = {
           root_dir = require('lspconfig').util.root_pattern { 'package.json', 'tsconfig.json' },
           single_file_support = false,
           settings = {},
