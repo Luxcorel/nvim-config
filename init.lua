@@ -547,7 +547,12 @@ require('lazy').setup({
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         actionlint = {},
-        bashls = {},
+        bashls = {
+          filetypes = {
+            'sh',
+            'zsh',
+          },
+        },
         clangd = {},
         denols = {
           root_dir = require('lspconfig').util.root_pattern { 'deno.json', 'deno.jsonc' },
