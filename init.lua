@@ -75,6 +75,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Paste without copying replaced text
+vim.keymap.set('v', '<leader>p', '"_dP', { noremap = true, silent = true })
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
