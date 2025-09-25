@@ -607,7 +607,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        actionlint = {},
         bashls = {
           filetypes = {
             'sh',
@@ -615,6 +614,7 @@ require('lazy').setup({
           },
         },
         clangd = {},
+        cssls = {},
         denols = {
           root_dir = require('lspconfig').util.root_pattern { 'deno.json', 'deno.jsonc' },
           single_file_support = false,
@@ -631,16 +631,29 @@ require('lazy').setup({
             },
           },
         },
-        shellcheck = {},
-        shfmt = {},
-        stylua = {},
+        omnisharp = {},
         tailwindcss = {},
         terraformls = {},
+        texlab = {},
         ts_ls = {
+          -- Only use ts_ls in projects that (hopefully) isn't Deno
           root_dir = require('lspconfig').util.root_pattern { 'package.json', 'tsconfig.json' },
           single_file_support = false,
           settings = {},
+
+          -- Make Vue3 work
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                languages = { 'vue' },
+              },
+            },
+          },
         },
+        vue_ls = {},
       }
 
       require('mason').setup()
@@ -649,7 +662,16 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        actionlint = {},
+        csharpier = {},
+        delve = {},
+        netcoredbg = {},
+        stylua = {},
+        semgrep = {},
+        shellcheck = {},
+        shfmt = {},
+        stylelint = {},
+        tectonic = {},
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
